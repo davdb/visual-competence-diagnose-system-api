@@ -1,0 +1,8 @@
+user:
+  create:
+    success: 'Uzytkownik zostal utworzony pomyslnie'
+    emailExist: 'Uytkownik o wskazanym adresie email został wcześniej zarejstowany w systemie'
+
+validator:
+  not_blank: 'Pole nie moze byc puste'
+  email: 'Wprowadzono niepoprawny email'
