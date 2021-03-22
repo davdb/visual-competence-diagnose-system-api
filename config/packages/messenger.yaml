@@ -1,0 +1,35 @@
+framework:
+  messenger:
+    default_bus: command.bus
+
+    buses:
+      command.bus:
+        middleware:
+          - doctrine_transaction
+      query.bus: ~
+
+    transports:
+      sync: "sync://"
+      async: "%env(MESSENGER_TRANSPORT_DSN)%"
+
+    routing:
+      'App\Command\User\CreateUserCommand': sync
+      'App\Command\User\EditUserCommand': sync
+      'App\Command\User\DeleteUserCommand': sync
+      'App\Command\User\ChangeEnableUserCommand': sync
+      'App\Command\User\ChangePermissionUserCommand': sync
+      'App\Command\VisualPerception\CreateVisualPerceptionCommand': sync
+      'App\Command\VisualPerception\EditVisualPerceptionCommand': sync
+      'App\Command\VisualPerception\DeleteVisualPerceptionCommand': sync
+      'App\Command\VisualReception\CreateVisualReceptionCommand': sync
+      'App\Command\VisualReception\EditVisualReceptionCommand': sync
+      'App\Command\VisualReception\DeleteVisualReceptionCommand': sync
+      'App\Command\VisualProduction\CreateVisualProductionCommand': sync
+      'App\Command\VisualProduction\EditVisualProductionCommand': sync
+      'App\Command\VisualProduction\DeleteVisualProductionCommand': sync
+      'App\Command\Test\CreateTestCommand': sync
+      'App\Query\User\UserWithEmailExistQuery': sync
+      'App\Query\User\UserWithUsernameExistQuery': async
+      'App\Query\VisualPerception\RandomVisualPerceptionTasksQuery': sync
+      'App\Query\VisualReception\RandomVisualReceptionTasksQuery': sync
+      'App\Query\VisualProduction\RandomVisualProductionTasksQuery': sync
