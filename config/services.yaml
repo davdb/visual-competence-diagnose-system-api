@@ -7,7 +7,7 @@ parameters:
   visual_perception_directory: '%kernel.project_dir%/public/uploads/visual_perception_assets'
   visual_reception_directory: '%kernel.project_dir%/public/uploads/visual_reception_assets'
   visual_production_directory: '%kernel.project_dir%/public/uploads/visual_production_assets'
-  server: "http://localhost:8000/"
+  server: "http://localhost:8000"
   visual_perception_directory_path: '%server%/uploads/visual_perception_assets'
   visual_reception_directory_path: '%server%/uploads/visual_reception_assets'
   visual_production_directory_path: '%server%/uploads/visual_production_assets'
@@ -54,6 +54,11 @@ services:
         class: App\EventListener\AuthenticationSuccessListener
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
+
+  acme_api.event.authentication_failure_listener:
+        class: App\EventListener\AuthenticationFailureListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_failure, method: onAuthenticationFailureResponse }
 
   App\Command\User\CreateUserCommandHandler:
     tags:

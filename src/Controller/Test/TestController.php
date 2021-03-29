@@ -72,7 +72,13 @@ class TestController extends AbstractController
     {
         $testId = $id;
 
-        $test = $this->repository->getTestById($testId);
+        $arrayWithAssets = [
+            "perception" => $this->getParameter("visual_perception_directory"),
+            "reception" => $this->getParameter("visual_reception_directory"),
+            "production" => $this->getParameter("visual_production_directory")
+        ];
+
+        $test = $this->repository->getTestById($testId, $arrayWithAssets);
         return new JsonResponse($this->serializer->serialize(
             $test,
             'json',
